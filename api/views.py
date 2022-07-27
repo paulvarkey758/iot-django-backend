@@ -18,4 +18,13 @@ def writeData(request,pk):
     serializer=ComponentSerializer(instance=d,data=request.data)
     if serializer.is_valid():
         serializer.save()
-        return Response(serializer.data)    
+        return Response(serializer.data)   
+
+@api_view(['POST'])
+def createData(request):
+    serializer=ComponentSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    else:
+        return Response("serializer is not valid")                  

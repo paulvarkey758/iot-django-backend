@@ -7,4 +7,5 @@ from . import views
 urlpatterns=[
     path('read-data/',views.readData,name="read-data"),
     path('write-data/<int:pk>/',views.writeData,name="write-data"),
+    path('create-data/',views.createData,name="create-data"),
 ]
