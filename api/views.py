@@ -22,7 +22,9 @@ def writeData(request,pk):
     serializer=ComponentSerializer(instance=d,data=data)
     if serializer.is_valid():
         serializer.save()
-        return Response(serializer.data)   
+        return Response(serializer.data) 
+    else:
+        return Response("serializer is not valid")         
 
 @api_view(['POST'])
 @parser_classes([JSONParser])
