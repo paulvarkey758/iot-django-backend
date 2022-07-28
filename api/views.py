@@ -18,7 +18,8 @@ def readData(request):
 @parser_classes([JSONParser])
 def writeData(request,pk):
     d=Component.objects.get(id=pk)
-    serializer=ComponentSerializer(instance=d,data=request.data)
+    data=json.loads(request.data)
+    serializer=ComponentSerializer(instance=d,data=data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)   
