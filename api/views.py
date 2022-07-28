@@ -24,7 +24,7 @@ def writeData(request,pk):
         serializer.save()
         return Response(serializer.data) 
     else:
-        return Response("serializer is not valid")         
+        return Response(serializer)         
 
 @api_view(['POST'])
 @parser_classes([JSONParser])
