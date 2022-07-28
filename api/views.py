@@ -4,7 +4,6 @@ from .serializers import ComponentSerializer
 from rest_framework.decorators import api_view,parser_classes
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
-import json
 
 # Create your views here.
 @api_view(['GET'])
@@ -26,8 +25,7 @@ def writeData(request,pk):
 @api_view(['POST'])
 @parser_classes([JSONParser])
 def createData(request):
-    data=json.loads(request.data)
-    serializer=ComponentSerializer(data=data)
+    serializer=ComponentSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)
