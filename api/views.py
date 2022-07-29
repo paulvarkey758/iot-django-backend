@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import Component
-from .serializers import ComponentSerializer
+from .models import Component,Sensor
+from .serializers import ComponentSerializer,SensorSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -28,4 +28,21 @@ def createData(request):
         serializer.save()
         return Response(serializer.data)
     else:
-        return Response("serializer is not valid")                  
+        return Response("serializer is not valid")
+
+
+@api_view(['GET'])
+def sensorRead(request):
+    sdata=Sensor.objects.all()
+    serializer=SensorSerializer(sdata, many=True) 
+    return Response(serializer.data)     
+
+@api_view(['PUT'])
+def sensorWrite(request,pk):
+    sdata=Sensor.objects.get(id=pk)
+    serializer=SensorSerializer(instance=sdata,data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    else:
+        return Response("serializer is not valid")    
